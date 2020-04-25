@@ -1,0 +1,9 @@
+set autoindent
+set linenumbers
+set nowrap
+set tabstospaces
+
+## PHP
+include "/usr/share/nano/php.nanorc"
+## JavaScript
+include "/usr/share/nano/js.nanorc"
