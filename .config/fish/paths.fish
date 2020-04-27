@@ -1,8 +1,8 @@
 # Common
 pathadd /usr/local/sbin
 pathadd /usr/local/bin
-pathadd /usr/sbin 
-pathadd /usr/bin 
+pathadd /usr/sbin
+pathadd /usr/bin
 pathadd /bin
 
 # Local Bin
@@ -11,3 +11,13 @@ pathadd ~/bin
 
 # Rust
 pathadd ~/.cargo/bin
+
+# Add PyEnv bin to PATH to access its shim if it exists, and load pyenv and virtualenv-init, etc
+set -x PYENV_ROOT $HOME/.pyenv
+pathadd $PYENV_ROOT/bin &&
+  status --is-interactive &&
+  pyenv init - | source
+
+# Add RbEnv root to PATH to access its shims if it exists
+set -x RBENV_ROOT $HOME/.rbenv
+pathadd $RBENV_ROOT/bin
