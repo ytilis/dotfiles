@@ -117,4 +117,6 @@ fi
 # Starship init
 eval "$(starship init bash)"
 
-source ~/.config/broot/launcher/bash/br
+if [ -e $HOME/.config/broot/launcher/bash/br ]; then
+    source ~/.config/broot/launcher/bash/br
+fi

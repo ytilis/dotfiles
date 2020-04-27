@@ -5,3 +5,5 @@
 	user = ytilis
 [push]
 	default = simple
+[core]
+	pager = delta --dark
