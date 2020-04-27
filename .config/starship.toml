@@ -8,3 +8,6 @@ threshold = 25
 
 [hostname]
 ssh_only = false
+
+[env_var]
+variable = "STARSHIP_SHELL"
