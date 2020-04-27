@@ -12,12 +12,14 @@ pathadd ~/bin
 # Rust
 pathadd ~/.cargo/bin
 
-# Add PyEnv bin to PATH to access its shim if it exists, and load pyenv and virtualenv-init, etc
+# Add PyEnv bin to PATH for shims if it exists, and load pyenv
 set -x PYENV_ROOT $HOME/.pyenv
 pathadd $PYENV_ROOT/bin &&
   status --is-interactive &&
   pyenv init - | source
 
-# Add RbEnv root to PATH to access its shims if it exists
+# Add RbEnv bin to PATH for shims if it exists, and load rbenv
 set -x RBENV_ROOT $HOME/.rbenv
-pathadd $RBENV_ROOT/bin
+pathadd $RBENV_ROOT/bin &&
+  status --is-interactive &&
+  rbenv init - | source

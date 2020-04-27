@@ -131,6 +131,9 @@ if [ -d $HOME/.rbenv ]; then
     # Ruby path reference
     export RBENV_ROOT="$HOME/.rbenv"
     export PATH="$RBENV_ROOT/bin:$PATH"
+
+    # RbEnv init
+    eval "$(rbenv init -)"
 fi
 
 # Starship init
