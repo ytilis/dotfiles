@@ -15,26 +15,16 @@ if not functions -q fisher
   fish -c fisher
 end
 
-# Add PyEnv, if available
-if test -d "$HOME/.pyenv"
-  # set where pyenv is installed
-  set -x PYENV_ROOT $HOME/.pyenv
+# Add PyEnv bin to PATH to access its shim if it exists, and load pyenv and virtualenv-init, etc
+set -x PYENV_ROOT $HOME/.pyenv
+pathadd $PYENV_ROOT/bin && 
+  status --is-interactive && 
+  pyenv init - | source
 
-  # Add pyenv root to PATH to access its shims
-  pathadd $PYENV_ROOT/bin
-
-  # load pyenv and virtualenv-init, etc
-  status --is-interactive; and pyenv init - | source
-end
-
-# Add RbEnv, if available
-if test -d "$HOME/.rbenv"
-  # set where rbenv is installed
-  set -x RBENV_ROOT $HOME/.rbenv
-
-  # Add rbenv root to PATH to access its shims
-  pathadd $RBENV_ROOT/bin
-end
-
+# Add RbEnv root to PATH to access its shims if it exists
+set -x RBENV_ROOT $HOME/.rbenv
+pathadd $RBENV_ROOT/bin
+  
+    
 # Starship init
 starship init fish | source
