@@ -1,5 +1,6 @@
 source ~/.config/fish/lang.fish
 source ~/.config/fish/paths.fish
+source ~/.config/fish/sshuttle.fish
 
 # Fisher init
 if not functions -q fisher

@@ -12,6 +12,9 @@ pathadd ~/bin
 # Rust
 pathadd ~/.cargo/bin
 
+# Local NPM
+pathadd ~/.npm-global/bin
+
 # Add PyEnv bin to PATH for shims if it exists, and load pyenv
 set -x PYENV_ROOT $HOME/.pyenv
 pathadd $PYENV_ROOT/bin &&
