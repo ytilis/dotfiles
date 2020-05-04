@@ -1,9 +1,10 @@
 [user]
-	name = Yury Tilis
-	email = ytilis@gmail.com
+  name = Yury Tilis
+  email = ytilis@gmail.com
 [github]
-	user = ytilis
+  user = ytilis
 [push]
-	default = simple
+  default = simple
 [core]
-	pager = delta --dark
+  pager = delta --dark
+  excludesfile = ~/.gitignore_global
