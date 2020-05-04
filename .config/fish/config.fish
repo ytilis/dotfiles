@@ -1,6 +1,9 @@
 source ~/.config/fish/lang.fish
 source ~/.config/fish/paths.fish
-source ~/.config/fish/sshuttle.fish
+source ~/.config/fish/functions/sshuttle.fish
+
+# Set GPG TTY
+set -x GPG_TTY (tty)
 
 # Fisher init
 if not functions -q fisher
