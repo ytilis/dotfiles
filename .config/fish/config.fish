@@ -1,5 +1,7 @@
 source ~/.config/fish/lang.fish
+source ~/.config/fish/abbr.fish
 source ~/.config/fish/paths.fish
+source ~/.config/fish/functions/cl.fish
 source ~/.config/fish/functions/sshuttle.fish
 
 # Set GPG TTY

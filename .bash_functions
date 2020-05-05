@@ -1,4 +1,18 @@
+function cl() {
+  DIR="$*";
+  # if no DIR given, go home
+  if [ $# -lt 1 ]; then
+    DIR=$HOME;
+  fi;
+  builtin cd "${DIR}" && \
+  # use your preferred ls command
+  ls -la --color=auto
+}
+
+
+
 # sshuttle helpers
+#########################
 
 # set default SSH server:
 #   user@hostname or a host in ~/.ssh/config
@@ -46,4 +60,3 @@ function tnlbut() {
 function vpnto() {
   sshuttle -HNvr $1;
 }
-
