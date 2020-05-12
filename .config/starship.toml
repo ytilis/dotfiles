@@ -9,8 +9,15 @@ threshold = 25
 [hostname]
 ssh_only = false
 
-[env_var]
-variable = "STARSHIP_SHELL"
-
 [git_status]
 deleted = "×"
+
+# [env_var]
+# variable = "STARSHIP_SHELL"
+
+[custom.shell]
+description = "The current shell we're in"
+when = "echo true"
+command = "echo $STARSHIP_SHELL | sed -e \"s/fi/🐟/\" | sed -e \"s/ba/🏏/\""
+prefix = "via "
+style = "bold dimmed black"
