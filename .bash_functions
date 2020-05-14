@@ -1,3 +1,4 @@
+# Navigation shortcut
 function cl() {
   DIR="$*";
   # if no DIR given, go home
@@ -9,7 +10,17 @@ function cl() {
   ls -la --color=auto
 }
 
+# Standardized function to set env vars
+function setenv() {
+  export "$1=$2";
+}
 
+# Source optional file shorthand
+function sourceIf() {
+  local -r file="$1"
+  shift
+  test -f "$file" && source "$file" "$@"
+}
 
 # sshuttle helpers
 #########################
