@@ -9,4 +9,4 @@
   pager = delta --dark
   excludesfile = ~/.gitignore_global
 [includeIf "gitdir:~/BNY/"]
-  path = ~/.gitconfig-bny
+  path = ~/.gitconfig_bny
