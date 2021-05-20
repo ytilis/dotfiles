@@ -10,7 +10,7 @@
 format = "[ $path]($style)[$read_only]($read_only_style) "
 
 [hostname]
-format = "[ $hostname]($style) "
+format = "[  $hostname]($style) "
 ssh_only = false
 
 [shell]
@@ -80,7 +80,7 @@ format = "[$symbol (v$output )]($style)"
 description = "The current React version"
 when = "nmodv 'react'"
 command = "nmodv 'react'"
-symbol = " "
+symbol = ""
 style = "bold dimmed blue"
 format = "[$symbol (v$output )]($style)"
 
