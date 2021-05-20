@@ -1,23 +1,93 @@
-[battery]
-full_symbol = "🔋"
-charging_symbol = "⚡️"
-discharging_symbol = "💀"
+#[battery]
+#full_symbol = "🔋"
+#charging_symbol = "⚡️"
+#discharging_symbol = "💀"
 
-[[battery.display]]
-threshold = 25
+#[[battery.display]]
+#threshold = 25
+
+[directory]
+format = "[ $path]($style)[$read_only]($read_only_style) "
 
 [hostname]
+format = "[ $hostname]($style) "
 ssh_only = false
 
-[git_status]
-deleted = "×"
+[shell]
+disabled = false
+bash_indicator = "_"
+fish_indicator = "_"
+zsh_indicator = "%_"
+powershell_indicator = "_"
+unknown_indicator = "?_"
 
-# [env_var]
-# variable = "STARSHIP_SHELL"
+[shlvl]
+symbol = " "
+disabled = false
 
-[custom.shell]
-description = "The current shell we're in"
-when = "echo true"
-command = "echo $STARSHIP_SHELL | sed -e \"s/fi/🐟/\" | sed -e \"s/ba/🏏/\""
-prefix = "via "
-style = "bold dimmed black"
+#[git_status]
+#staged_count.enabled = true
+#conflicted_count.enabled = true
+#untracked_count.enabled = true
+#stashed_count.enabled = true
+#modified_count.enabled = true
+#staged_count.enabled = true
+#renamed_count.enabled = true
+#deleted_count.enabled = true
+#show_sync_count.enabled = true
+#deleted = "×"
+
+#[custom.lastcommit]
+#description = "Display last commit hash and message"
+#command = "git show -s --format='%h \"%s\"'"
+#when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+#style = "bright-yellow bold"
+#format = "[$output]($style) "
+
+[custom.giturl]
+# disabled = true
+description = "Display symbol for remote Git server"
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+  GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+  GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+  GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "azure" || "$GIT_REMOTE" =~ "visualstudio" ]]; then
+  GIT_REMOTE_SYMBOL="ﴃ "
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+  GIT_REMOTE_SYMBOL=" "
+else
+  GIT_REMOTE_SYMBOL=" "
+fi
+echo "$GIT_REMOTE_SYMBOL "
+"""
+shell = ["bash", "--noprofile", "--norc"]
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+format = "at $output  "
+
+[custom.angular]
+description = "The current Angular version"
+when = "nmodv '@angular/core'"
+command = "nmodv '@angular/core'"
+symbol = ""
+style = "bold dimmed red"
+format = "[$symbol (v$output )]($style)"
+
+[custom.react]
+description = "The current React version"
+when = "nmodv 'react'"
+command = "nmodv 'react'"
+symbol = " "
+style = "bold dimmed blue"
+format = "[$symbol (v$output )]($style)"
+
+[custom.vue]
+description = "The current Vue version"
+when = "nmodv 'vue'"
+command = "nmodv 'vue'"
+symbol = "﵂"
+style = "bold dimmed green"
+format = "[$symbol (v$output )]($style)"
