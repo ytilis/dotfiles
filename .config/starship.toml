@@ -1,77 +1,172 @@
-#[battery]
-#full_symbol = "🔋"
-#charging_symbol = "⚡️"
-#discharging_symbol = "💀"
+##### GLOBAL
+command_timeout = 1000
 
-#[[battery.display]]
-#threshold = 25
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+${custom.git_remote}\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+${custom.last_commit}\
+$line_break\
+$cmd_duration\
+$lua\
+$jobs\
+$battery\
+$time\
+$status\
+$shell\
+$character"""
 
-[directory]
-format = "[ $path]($style)[$read_only]($read_only_style) "
 
+##### LANGUAGES
+[package]
+display_private = true
+symbol = ''
+format = '''
+
+[$symbol $version]($style) '''
+
+[dotnet]
+symbol = ''
+format = '[$symbol ($version )(什 $tfm )]($style)'
+
+[java]
+symbol = ''
+format = '[${symbol} (${version} )]($style)'
+
+[nodejs]
+symbol = ''
+format = '[$symbol ($version )]($style)'
+
+[php]
+symbol = ''
+format = '[$symbol ($version )]($style)'
+
+[python]
+symbol = ''
+format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[ruby]
+symbol = ''
+format = '[$symbol ($version )]($style)'
+
+[rust]
+symbol = ''
+format = '[$symbol ($version )]($style)'
+
+[swift]
+symbol = ''
+format = '[$symbol ($version )]($style)'
+
+
+##### SYSTEM
 [username]
-format = "[ $user]($style) "
+format = '[ $user]($style) '
 show_always = true
 
 [hostname]
-format = "[ $hostname]($style) "
+format = '[ $hostname]($style) '
 ssh_only = false
+
+[directory]
+format = '[ $path]($style)[$read_only]($read_only_style) '
+
+[time]
+disabled = false
+style = 'bold white'
+time_format = "%I:%M %p"
+format = '''[\[$time\]]($style) '''
 
 [shell]
 disabled = false
-bash_indicator = "_"
-fish_indicator = "_"
-zsh_indicator = "%_"
-powershell_indicator = "_"
-unknown_indicator = "?_"
+bash_indicator = '_'
+fish_indicator = '_'
+zsh_indicator = '%_'
+powershell_indicator = '_'
+unknown_indicator = '?_'
 
 [shlvl]
-symbol = " "
 disabled = false
+symbol = ' '
 
+[cmd_duration]
+style = 'bold yellow'
+format = '''[\[ $duration\]]($style)'''
+
+[jobs]
+symbol = ''
+format = '''[\[$symbol $number\]]($style)'''
+threshold = 1
+
+
+##### GIT
 [git_status]
-format = '([\[ $all_status$ahead_behind\]]($style) )'
-ahead = "⇡${count} "
-behind = "⇣${count} "
-diverged = " ⇡${ahead_count}⇣${behind_count}"
-deleted = " ${count} "
-untracked = " ${count} "
-stashed = " ${count} "
-modified = " ${count} "
-staged = " ${count} "
-renamed = " ${count} "
-conflicted = " ${count} "
+format = '''([\[$all_status$ahead_behind\]]($style) )'''
+ahead = ' ⇡${count} '
+behind = ' ⇣${count} '
+diverged = '  ⇡${ahead_count}⇣${behind_count}'
+deleted = '  ${count}'
+untracked = '  ${count}'
+stashed = '  ${count}'
+modified = '  ${count}'
+staged = '  ${count}'
+renamed = '  ${count}'
+conflicted = '  ${count}'
 
-[custom.angular]
-description = "The current Angular version"
-when = "nmodv '@angular/core'"
-command = "nmodv '@angular/core'"
-symbol = ""
-style = "bold dimmed red"
-format = "[$symbol (v$output )]($style)"
-
-[custom.react]
-description = "The current React version"
-when = "nmodv 'react'"
-command = "nmodv 'react'"
-symbol = ""
-style = "bold dimmed blue"
-format = "[$symbol (v$output )]($style)"
-
-[custom.vue]
-description = "The current Vue version"
-when = "nmodv 'vue'"
-command = "nmodv 'vue'"
-symbol = "﵂"
-style = "bold dimmed green"
-format = "[$symbol (v$output )]($style)"
-
-[custom.giturl]
+[custom.git_remote]
 # disabled = true
-description = "Display git email and symbol for remote Git server"
-command = """
+description = 'Display git email and symbol for remote Git server'
+command = '''
 GIT_EMAIL=$(git config user.email)
 GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+
 if [[ "$GIT_REMOTE" =~ "github" ]]; then
   GIT_REMOTE_SYMBOL=""
 elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
@@ -88,19 +183,44 @@ else
   GIT_REMOTE_SYMBOL=""
 fi
 echo "$GIT_REMOTE_SYMBOL $GIT_EMAIL"
-"""
+'''
 shell = ["bash", "--noprofile", "--norc"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-style = "bold dimmed white"
-format = "[$output ]($style)"
+style = 'bold dimmed white'
+format = '[$output ]($style)'
 
-[custom.lastcommit]
+[custom.last_commit]
 description = "Display last commit hash and message"
-command = """
-git show -s --format=' %h %s'
-"""
+command = '''git show -s --format=" %h %s"'''
+shell = ["bash", "--noprofile", "--norc"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-style = "bright-yellow bold"
-format = """
+style = 'bold dimmed yellow'
+format = '''
 
-[$output ]($style)"""
+[$output ]($style)'''
+
+
+##### FRAMEWORKS
+[custom.angular]
+description = 'The current Angular version'
+command = "nmodv '@angular/core'"
+when = 'nmodv "@angular/core"'
+symbol = ''
+style = 'bold dimmed red'
+format = '[$symbol (v$output )]($style)'
+
+[custom.react]
+description = 'The current React version'
+command = 'nmodv "react"'
+when = 'nmodv "react"'
+symbol = ''
+style = 'bold dimmed blue'
+format = '[$symbol (v$output )]($style)'
+
+[custom.vue]
+description = 'The current Vue version'
+command = 'nmodv "vue"'
+when = 'nmodv "vue"'
+symbol = '﵂'
+style = 'bold dimmed green'
+format = '[$symbol (v$output )]($style)'
