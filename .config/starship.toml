@@ -2,18 +2,12 @@
 command_timeout = 1000
 
 format = """
+$time\
 $username\
 $hostname\
 $shlvl\
 $kubernetes\
 $directory\
-$vcsh\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-${custom.git_remote}\
-$hg_branch\
 $docker_context\
 $package\
 $cmake\
@@ -53,13 +47,19 @@ $openstack\
 $env_var\
 $crystal\
 $custom\
+$cmd_duration\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+${custom.git_remote}\
+$hg_branch\
 ${custom.last_commit}\
 $line_break\
-$cmd_duration\
 $lua\
 $jobs\
 $battery\
-$time\
 $status\
 $shell\
 $character"""
@@ -69,9 +69,7 @@ $character"""
 [package]
 display_private = true
 symbol = ''
-format = '''
-
-[$symbol $version]($style) '''
+format = '[$symbol ($version )]($style)'
 
 [dotnet]
 symbol = ''
@@ -122,7 +120,7 @@ format = '[ $path]($style)[$read_only]($read_only_style) '
 disabled = false
 style = 'bold white'
 time_format = "%I:%M %p"
-format = '''[\[$time\]]($style) '''
+format = '''[ $time]($style) '''
 
 [shell]
 disabled = false
@@ -138,7 +136,7 @@ symbol = ' '
 
 [cmd_duration]
 style = 'bold yellow'
-format = '''[\[ $duration\]]($style)'''
+format = '''[祥 $duration ]($style)'''
 
 [jobs]
 symbol = ''
@@ -147,6 +145,12 @@ threshold = 1
 
 
 ##### GIT
+[git_branch]
+symbol = ''
+format = '''
+
+[$symbol $branch ]($style)'''
+
 [git_status]
 format = '''([\[$all_status$ahead_behind\]]($style) )'''
 ahead = ' ⇡${count} '
@@ -191,13 +195,13 @@ format = '[$output ]($style)'
 
 [custom.last_commit]
 description = "Display last commit hash and message"
-command = '''git show -s --format=" %h %s"'''
+command = '''git show -s --format="%h %s"'''
 shell = ["bash", "--noprofile", "--norc"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 style = 'bold dimmed yellow'
 format = '''
 
-[$output ]($style)'''
+[ $output ]($style)'''
 
 
 ##### FRAMEWORKS
