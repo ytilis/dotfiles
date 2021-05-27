@@ -8,5 +8,15 @@
 [core]
   pager = delta --dark
   excludesfile = ~/.gitignore_global
+[alias]
+  graph = -c core.pager='less -S' log --pretty='tformat:%C(bold cyan)%h %C(blue)%<(15,trunc)%aN %<(50,trunc)%C(white)%s %C(auto)%d %C(dim green)%ar' --graph
+  branches = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  undo = reset HEAD~1 --mixed
+  last = log -1 HEAD --stat
+  search = !git rev-list --all | xargs git grep -F
+  amend = commit -a --amend
+  wipe = !git add -A && git commit -qm 'WIPED' && git reset HEAD~1 --hard
+  del = branch -D
+  cob = checkout -b
 [includeIf "gitdir:*/BNY/"]
   path = ~/.gitconfig_bny
