@@ -120,7 +120,7 @@ show_always = true
 
 [hostname]
 style = 'green'
-format = '[ $hostname]($style) '
+format = '[歷 $hostname]($style) '
 ssh_only = false
 
 [directory]
