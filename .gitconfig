@@ -18,5 +18,6 @@
   wipe = !git add -A && git commit -qm 'WIPED' && git reset HEAD~1 --hard
   del = branch -D
   cob = checkout -b
+  reb = "!f() { git rebase -i HEAD~${1}; }; f"
 [includeIf "gitdir:*/BNY/"]
   path = ~/.gitconfig_bny
