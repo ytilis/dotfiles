@@ -207,7 +207,7 @@ format = '[$output ]($style)'
 
 [custom.last_commit]
 description = "Display last commit hash and message"
-command = '''git show -s --format="%h  %ar  %<(20,trunc)%aE  %<(50,trunc)%s"'''
+command = '''git show -s --format="%h  %ar  %<(25,trunc)%aE  %<(50,trunc)%s"'''
 shell = ["bash", "--noprofile", "--norc"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 style = 'dimmed yellow'
