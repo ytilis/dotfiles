@@ -18,6 +18,8 @@ hs.hotkey.bind({"cmd"}, "escape", function()
       kitty = hs.application.get("kitty")
   end
 
-  kitty:mainWindow():moveToUnit'[100,75,0,0]'
-  kitty:mainWindow().setShadows(false)
+  if kitty then
+    kitty:mainWindow():moveToUnit'[100,75,0,0]'
+    kitty:mainWindow().setShadows(false)
+  end
 end)
