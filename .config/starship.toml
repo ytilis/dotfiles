@@ -3,11 +3,11 @@ command_timeout = 1000
 
 format = """
 $time\
+$directory\
 $username\
 $hostname\
 $shlvl\
 $kubernetes\
-$directory\
 $docker_context\
 $package\
 $cmake\
@@ -120,7 +120,7 @@ show_always = true
 
 [hostname]
 style = 'green'
-format = '[歷 $hostname]($style) '
+format = '[力$hostname]($style) '
 ssh_only = false
 
 [directory]
@@ -145,6 +145,10 @@ unknown_indicator = '?_'
 disabled = false
 symbol = '礪'
 style = 'yellow'
+
+[docker_context]
+symbol=" "
+format = '[$symbol$context]($style) '
 
 [cmd_duration]
 style = 'yellow'
